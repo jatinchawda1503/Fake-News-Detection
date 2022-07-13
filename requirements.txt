@@ -1,1 +1,4 @@
 pandas==1.4.3
+nltk==3.7
+scikit-learn==1.1.1
+matplotlib==3.5.2
