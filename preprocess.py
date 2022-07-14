@@ -3,10 +3,8 @@ import os
 import re
 import nltk
 from nltk.corpus import stopwords
-from nltk import PorterStemmer
 from nltk import LancasterStemmer
 import joblib
-from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
