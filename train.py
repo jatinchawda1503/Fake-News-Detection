@@ -9,7 +9,6 @@ def build_model(data):
     data = clean_data(data)
     X,y =select_features(data,['title','author','text'],['label'])
     X = preprocess_data(X)
-    
     X_train,X_test,y_train,y_test = train_split(X,y,0.2,0)
     X_train = vectorize_data(X_train,'train')
     X_test = vectorize_data(X_test,'test')
