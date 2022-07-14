@@ -132,3 +132,5 @@ dmypy.json
 data/
 .vscode
 .DS_Store
+.ipynb_checkpoints
+fake-news.ipynb
