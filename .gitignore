@@ -134,3 +134,4 @@ data/
 .DS_Store
 .ipynb_checkpoints
 fake-news.ipynb
+main.py
