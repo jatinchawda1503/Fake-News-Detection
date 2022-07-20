@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from preprocess import clean_data,preprocess_data,vectorize_data,select_features,train_split,vectorize_data,fit_model,get_prediction,get_report
+from fake_news.preprocess import clean_data,preprocess_data,vectorize_data,select_features,train_split,vectorize_data,fit_model,get_prediction,get_report
 import joblib
 
 
@@ -19,7 +19,7 @@ def build_model(data):
 
 
 if __name__ == '__main__':
-    data = pd.read_csv('./data/train.csv')
+    data = pd.read_csv('../data/train.csv')
     y_pred, matrix,report = build_model(data)
     print(y_pred)
     print(matrix)
