@@ -1,8 +1,8 @@
 from setuptools import setup,find_packages
 
 
-setup(name="fake_news",
-      version='0.1',
+setup(name="fakenews",
+      version='1.0',
       description="Detects Fake News",
       author='DSA-6',
       packages=find_packages(),
