@@ -1,5 +1,7 @@
 import pandas as pd
 import os
+import sys
+sys.path.insert(0, '..')
 import nltk
 from nltk.corpus import stopwords
 from nltk import LancasterStemmer
@@ -32,13 +34,13 @@ def preprocess_data(data):
         st_eng = set(stopwords.words('english'))
     isExist = os.path.exists('../models/')
     if not isExist:
-        os.makedirs('./models/')   
-    if not os.path.exists('/models/lancasterstemmer.joblib'):
+        os.makedirs('../models/')   
+    if not os.path.exists('../models/lancasterstemmer.joblib'):
             lancasterstemmer = LancasterStemmer()
-            joblib.dump(lancasterstemmer, '/models/lancasterstemmer.joblib', compress=0, protocol=None, cache_size=None)
+            joblib.dump(lancasterstemmer, '../models/lancasterstemmer.joblib', compress=0, protocol=None, cache_size=None)
             data = data.apply(lambda words: ' '.join(lancasterstemmer.stem(word.lower()) for word in words.split() if word not in st_eng))
     else:
-        lancasterstemmer = joblib.load('/models/lancasterstemmer.joblib')
+        lancasterstemmer = joblib.load('../models/lancasterstemmer.joblib')
         data = data.apply(lambda words: ' '.join(lancasterstemmer.stem(word.lower()) for word in words.split() if word not in st_eng))
     return data
 
