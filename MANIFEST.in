@@ -1,0 +1,2 @@
+# Include Models
+include fakenews/models/*.joblib
