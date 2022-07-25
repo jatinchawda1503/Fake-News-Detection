@@ -8,7 +8,7 @@ def make_predictions(data):
     X =select_features(data,['title','author','text'])
     X = preprocess_data(X)
     X = vectorize_data(X,'test')
-    model = joblib.load('../models/XGBClassifier.joblib')
+    model = joblib.load('./models/XGBClassifier.joblib')
     y_pred = get_prediction(model,X)
     return y_pred
 
