@@ -49,23 +49,23 @@ def train_split(x_data,y_data,test_size,rand):
 
 
 def vectorize_data(data,stage):
-    if stage == 'train' and not os.path.exists('./models/TfidfVectorizer.joblib'):  
+    if stage == 'train' and not os.path.exists('../models/TfidfVectorizer.joblib'):  
         vectorizer = TfidfVectorizer(ngram_range=(1,2))
         vectorizer.fit(data)
-        joblib.dump(vectorizer, './models/TfidfVectorizer.joblib', compress=0, protocol=None, cache_size=None)
+        joblib.dump(vectorizer, '../models/TfidfVectorizer.joblib', compress=0, protocol=None, cache_size=None)
         data = vectorizer.transform(data)
     else:
-        vectorizer = joblib.load('./models/TfidfVectorizer.joblib')
+        vectorizer = joblib.load('../models/TfidfVectorizer.joblib')
         data = vectorizer.transform(data)
     return data
 
 def fit_model(x_data,y_data):
-    if not os.path.exists('./models/XGBClassifier.joblib'):
+    if not os.path.exists('../models/XGBClassifier.joblib'):
         model = XGBClassifier()
         model.fit(x_data, y_data)
-        joblib.dump(model, './models/XGBClassifier.joblib', compress=0, protocol=None, cache_size=None)
+        joblib.dump(model, '../models/XGBClassifier.joblib', compress=0, protocol=None, cache_size=None)
     else:
-        model = joblib.load('./models/XGBClassifier.joblib')
+        model = joblib.load('../models/XGBClassifier.joblib')
     return model
 
 def get_prediction(model,data):
