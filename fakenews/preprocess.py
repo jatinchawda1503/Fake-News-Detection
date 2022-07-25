@@ -35,10 +35,10 @@ def preprocess_data(data):
         os.makedirs('./models/')   
     if not os.path.exists('/models/lancasterstemmer.joblib'):
             lancasterstemmer = LancasterStemmer()
-            joblib.dump(lancasterstemmer, './models/lancasterstemmer.joblib', compress=0, protocol=None, cache_size=None)
+            joblib.dump(lancasterstemmer, '/models/lancasterstemmer.joblib', compress=0, protocol=None, cache_size=None)
             data = data.apply(lambda words: ' '.join(lancasterstemmer.stem(word.lower()) for word in words.split() if word not in st_eng))
     else:
-        lancasterstemmer = joblib.load('./models/lancasterstemmer.joblib')
+        lancasterstemmer = joblib.load('/models/lancasterstemmer.joblib')
         data = data.apply(lambda words: ' '.join(lancasterstemmer.stem(word.lower()) for word in words.split() if word not in st_eng))
     return data
 
