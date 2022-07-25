@@ -1,5 +1,7 @@
 import pandas as pd
 import os
+import sys
+path = sys.path[-1]
 import nltk
 from nltk.corpus import stopwords
 from nltk import LancasterStemmer
@@ -30,15 +32,15 @@ def preprocess_data(data):
         nltk.download('stopwords')
     else:
         st_eng = set(stopwords.words('english'))
-    isExist = os.path.exists('../models/')
+    isExist = os.path.exists(path +'/fakenews/models/')
     if not isExist:
-        os.makedirs('./models/')   
-    if not os.path.exists('/models/lancasterstemmer.joblib'):
+        os.makedirs(path + '/fakenews/models/')   
+    if not os.path.exists(path +'/fakenews/models/lancasterstemmer.joblib'):
             lancasterstemmer = LancasterStemmer()
-            joblib.dump(lancasterstemmer, './models/lancasterstemmer.joblib', compress=0, protocol=None, cache_size=None)
+            joblib.dump(lancasterstemmer, path + '/fakenews/models/lancasterstemmer.joblib', compress=0, protocol=None, cache_size=None)
             data = data.apply(lambda words: ' '.join(lancasterstemmer.stem(word.lower()) for word in words.split() if word not in st_eng))
     else:
-        lancasterstemmer = joblib.load('./models/lancasterstemmer.joblib')
+        lancasterstemmer = joblib.load(path + '/fakenews/models/lancasterstemmer.joblib')
         data = data.apply(lambda words: ' '.join(lancasterstemmer.stem(word.lower()) for word in words.split() if word not in st_eng))
     return data
 
@@ -47,23 +49,23 @@ def train_split(x_data,y_data,test_size,rand):
 
 
 def vectorize_data(data,stage):
-    if stage == 'train' and not os.path.exists('./models/TfidfVectorizer.joblib'):  
+    if stage == 'train' and not os.path.exists(path +'/fakenews/models/TfidfVectorizer.joblib'):  
         vectorizer = TfidfVectorizer(ngram_range=(1,2))
         vectorizer.fit(data)
-        joblib.dump(vectorizer, './models/TfidfVectorizer.joblib', compress=0, protocol=None, cache_size=None)
+        joblib.dump(vectorizer,path + '/fakenews/models/TfidfVectorizer.joblib', compress=0, protocol=None, cache_size=None)
         data = vectorizer.transform(data)
     else:
-        vectorizer = joblib.load('./models/TfidfVectorizer.joblib')
+        vectorizer = joblib.load(path +'/fakenews/models/TfidfVectorizer.joblib')
         data = vectorizer.transform(data)
     return data
 
 def fit_model(x_data,y_data):
-    if not os.path.exists('./models/XGBClassifier.joblib'):
+    if not os.path.exists(path +'/fakenews/models/XGBClassifier.joblib'):
         model = XGBClassifier()
         model.fit(x_data, y_data)
-        joblib.dump(model, './models/XGBClassifier.joblib', compress=0, protocol=None, cache_size=None)
+        joblib.dump(model,path + '/fakenews/models/XGBClassifier.joblib', compress=0, protocol=None, cache_size=None)
     else:
-        model = joblib.load('./models/XGBClassifier.joblib')
+        model = joblib.load(path +'/fakenews/models/XGBClassifier.joblib')
     return model
 
 def get_prediction(model,data):
