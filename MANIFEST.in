@@ -1,0 +1,4 @@
+# Include Models
+include fakenews/models/lancasterstemmer.joblib
+include fakenews/models/TfidfVectorizer.joblib
+include fakenews/models/*.joblib
