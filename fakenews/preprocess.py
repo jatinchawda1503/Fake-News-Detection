@@ -1,7 +1,9 @@
 import pandas as pd
 import os
-import sys
-path = sys.path[-1]
+# import sys
+# path = sys.path[-1]
+import site
+path = site.getsitepackages()[-1]
 import nltk
 from nltk.corpus import stopwords
 from nltk import LancasterStemmer

@@ -1,6 +1,8 @@
 import pandas as pd
-import sys
-path = sys.path[-1]
+#import sys
+#path = sys.path[-1]
+import site
+path = site.getsitepackages()[-1]
 from fakenews.preprocess import clean_data,preprocess_data,vectorize_data,select_features,vectorize_data,get_prediction
 import joblib
 
